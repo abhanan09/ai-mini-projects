@@ -1,0 +1,7 @@
+article = "the cricket bat is great the cricket bat helps beginners play cricket".lower()
+keyword = "cricket bat".lower()
+
+total_keywords= article.count(keyword)
+total_words= len(article.split())
+
+keyword_density= (total_keywords/total_words)*100
