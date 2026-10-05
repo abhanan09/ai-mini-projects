@@ -1,5 +1,5 @@
 import os #noqa
-
+#thumbnail generator
 import streamlit as st
 from huggingface_hub import InferenceClient 
 
