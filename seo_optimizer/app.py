@@ -3,7 +3,7 @@ import streamlit as st
 import textstat
 from google import genai
 from google.genai import types
-
+       
 api_key = os.environ.get("GOOGLE_API_KEY") or st.secrets.get("GOOGLE_API_KEY")
 
 st.set_page_config(page_title="SEO Optimizer" , page_icon="📈")
@@ -13,20 +13,22 @@ st.caption("Smart SEO, faster rankings: Let AI handle the algorithm while you ca
 if "Client" not in st.session_state:
     st.session_state.Client = genai.Client(api_key=api_key)
 
-keyword_input = st.text_input("Enter the keyword you want to rank for").lower()
-article_input = st.text_area("Paste your article or content here").lower()
+keyword_input = st.text_input("Enter the keyword you want to rank for")
+article_input = st.text_area("Paste your article or content here")
 st.caption("For accurate heading detection, format headings with # symbols (e.g., # Main Title, ## Subheading)")
 generate_clicked = st.button("Analyze")
 
 if generate_clicked: #noqa
-    if not keyword_input or not article_input:
+    if not keyword_input.strip() or not article_input.strip():
         st.warning("Please enter input first")
 
     else:
         with st.spinner("Analyzing..."):    
 
             try:
-                total_keywords = article_input.count(keyword_input)
+                keyword_lower = keyword_input.lower()
+                article_lower = article_input.lower()
+                total_keywords = article_lower.count(keyword_lower)
                 total_words = len(article_input.split())
                 lines = article_input.split("\n")
                 
